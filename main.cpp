@@ -4,7 +4,6 @@
 #include <mutex>
 #include <set>
 #include <cmath>
-#include <ctime>
 #include <algorithm>
 using namespace std;
 
@@ -42,7 +41,7 @@ bool Fits(int number, int m){
  * @param Result
  */
 void Func(int lower, int upper, int n, vector<int> &Result){
-    //cout << "Lower: " << lower << ", Upper: " << upper << endl;
+
     for (int i = lower; i <= upper; ++i) {
         if(Fits(i, n)){
             mtx.lock();
@@ -96,23 +95,23 @@ int main() {
         temp.join();
     //Сортировка вектора с ответами
     sort(Results.begin(), Results.end());
-    //Вывод последних трех сотен ответов из списка
-    vector<int> :: iterator it = Results.end();
+    
+    //Вывод последних двух сотен ответов из списка
+    /*vector<int> :: iterator it = Results.end();
     it--;
     for (int i = 0; i < 200; ++i) {
         cout << *it << " ";
         it--;
-    }
-    vector<int> :: size_type maxsize = Results.max_size();
+    }*/
 
     // Вывод всех ответов
-    //for(int temp : Results)
-      // cout << temp << " ";
+    for(int temp : Results)
+        cout << temp << " ";
 
     auto elapsed = chrono::high_resolution_clock::now() - start;
     long long nanosec = chrono::duration_cast<chrono::seconds>(elapsed).count();
 
     cout << endl << "Time: " << nanosec << " seconds." << endl;
-    //cout << "Max Size: " << maxsize;
+
     return 0;
 }
